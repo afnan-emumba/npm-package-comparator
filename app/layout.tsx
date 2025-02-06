@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
+import { Roboto } from "@next/font/google";
 import "./globals.css";
+
+const roboto = Roboto({
+  weight: ["100", "300", "400", "500", "700", "900"],
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "NPM Package Comparator",
@@ -12,11 +18,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
+    <html lang='en' className={roboto.className}>
       <head>
         <link rel='icon' href='/favicon.svg' />
       </head>
-      <body>{children}</body>
+      <body id='root'>{children}</body>
     </html>
   );
 }
