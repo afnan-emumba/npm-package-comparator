@@ -1,10 +1,14 @@
 import Navbar from "@/components/navbar/Navbar";
+import SearchBar from "@/components/search-bar/SearchBar";
+import styles from "./HomePage.module.css";
 
 const Home = () => {
   return (
-    <div>
+    <div className={styles.container}>
       <Navbar />
-      <h2>Home Page</h2>
+      <div className={styles.content}>
+        <SearchBar />
+      </div>
     </div>
   );
 };

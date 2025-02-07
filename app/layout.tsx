@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
+import AntdProvider from "@/components/ant-provider/AntProvider";
 import "./globals.css";
 
 const roboto = Roboto({
@@ -22,7 +23,10 @@ export default function RootLayout({
       <head>
         <link rel='icon' href='/favicon.svg' />
       </head>
-      <body id='root'>{children}</body>
+
+      <body id='root'>
+        <AntdProvider>{children}</AntdProvider>
+      </body>
     </html>
   );
 }
