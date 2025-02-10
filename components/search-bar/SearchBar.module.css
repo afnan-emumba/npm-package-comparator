@@ -21,3 +21,7 @@
     gap: 10px;
     border-radius: 0 4px 4px 0;
 }
+
+.container :global(.ant-select-selector) {
+    border-radius: 4px 0 0 4px;
+}
