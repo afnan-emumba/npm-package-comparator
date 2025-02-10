@@ -1,6 +1,4 @@
-import { Tag } from "antd";
 import type { TableProps } from "antd";
-import { formatDistanceToNow } from "date-fns";
 import { PackageDetails } from "@/types/interfaces";
 
 interface MyTableProps {

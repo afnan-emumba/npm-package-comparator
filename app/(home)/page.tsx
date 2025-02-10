@@ -47,6 +47,7 @@ const Home = () => {
         setWinner({ package: winner, ratio });
       }
     } catch (error) {
+      console.log(error);
       notification.open({
         message: "Error",
         description: "Something went wrong, please try again later",

@@ -106,7 +106,7 @@ export const getTableData = (packages: PackageDetails[]): MyTableProps[] => [
     key: "Authors/Publishers",
     package1: packages[0].author ? (
       <a
-        href={`https://www.github.com/${packages[0].author}`}
+        href={`https://www.npmjs.com/~${packages[0].author}`}
         target='_blank'
         rel='noopener noreferrer'
       >
@@ -116,7 +116,11 @@ export const getTableData = (packages: PackageDetails[]): MyTableProps[] => [
       "N/A"
     ),
     package2: packages[1].author ? (
-      <a href={`https://www.github.com/${packages[1].author}`} target='_blank'>
+      <a
+        href={`https://www.npmjs.com/~${packages[1].author}`}
+        target='_blank'
+        rel='noopener noreferrer'
+      >
         {packages[1].author}
       </a>
     ) : (

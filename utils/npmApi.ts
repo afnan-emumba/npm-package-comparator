@@ -30,7 +30,7 @@ export const fetchPackageDetails = async (packageName: string) => {
       keywords: data.collected.metadata.keywords || [],
       repository: data.collected.metadata.links.repository || null,
       license: data.collected.metadata.license || null,
-      author: data.collected.metadata.author?.name || null,
+      author: data.collected.metadata.publisher?.username || null,
       maintainerEmail: data.collected.metadata.maintainers?.[0]?.email || null,
       homePage: data.collected.metadata.links.homepage || null,
       bugs: data.collected.metadata.links.bugs || null,

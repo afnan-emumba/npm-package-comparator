@@ -1,6 +1,4 @@
-import { formatDistanceToNow } from "date-fns";
-import { Tag, Table } from "antd";
-import type { TableProps } from "antd";
+import { Table } from "antd";
 import { PackageDetails } from "@/types/interfaces";
 import { tableColumns } from "./TableColumns";
 import { getTableData } from "./TableData";
