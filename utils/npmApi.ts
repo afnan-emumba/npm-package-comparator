@@ -13,9 +13,18 @@ export const fetchPackages = async (query: string) => {
 export const fetchPackageDetails = async (packageName: string) => {
   const response = await fetch(`https://registry.npmjs.org/${packageName}`);
   const data = await response.json();
+  const latestVersion = data["dist-tags"].latest;
+  const latestVersionData = data.versions[latestVersion];
+
   return {
     name: data.name,
     description: data.description,
     lastModified: data.time.modified,
+    version: latestVersion,
+    keywords: latestVersionData.keywords || [],
+    repository: latestVersionData.repository?.url || null,
+    license: latestVersionData.license || null,
+    author: latestVersionData.author?.name || null,
+    maintainerEmail: data.maintainers?.[0]?.email || null,
   };
 };

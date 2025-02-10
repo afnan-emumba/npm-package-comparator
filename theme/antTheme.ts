@@ -9,5 +9,8 @@ export const antTheme: ThemeConfig = {
     Select: {
       borderRadius: 0,
     },
+    Table: {
+      headerBg: "#fafafa",
+    },
   },
 };

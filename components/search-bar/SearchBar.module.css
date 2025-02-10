@@ -5,7 +5,8 @@
     margin-top: 32px;
     padding: 24px;
     background-color: white;
-    width: 700px;
+    width: 850px;
+    border-radius: 4px;
 }
 
 .button {

@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Select, Button, Skeleton } from "antd";
+import { Select, Button, Skeleton, Spin } from "antd";
 import debounce from "lodash/debounce";
+import { LoadingOutlined } from "@ant-design/icons";
 import { SearchIcon } from "@/public/icons";
 import { fetchPackages } from "@/utils/npmApi";
 import styles from "./SearchBar.module.css";
@@ -13,13 +14,15 @@ interface SearchBarProps {
   selectedPackages: string[];
   setSelectedPackages: (value: string[]) => void;
   onCompare: () => void;
+  loading: boolean;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({
+function SearchBar({
   selectedPackages,
   setSelectedPackages,
   onCompare,
-}) => {
+  loading,
+}: SearchBarProps) {
   const [packages, setPackages] = useState<{ value: string; label: string }[]>(
     []
   );
@@ -79,12 +82,23 @@ const SearchBar: React.FC<SearchBarProps> = ({
             alignItems: "center",
           }}
         >
-          <SearchIcon />
+          {loading ? (
+            <Spin
+              indicator={
+                <LoadingOutlined
+                  style={{ fontSize: 12, color: "white" }}
+                  spin
+                />
+              }
+            />
+          ) : (
+            <SearchIcon />
+          )}
         </div>
         Compare
       </Button>
     </div>
   );
-};
+}
 
 export default SearchBar;

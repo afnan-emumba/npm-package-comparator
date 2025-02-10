@@ -8,3 +8,13 @@
     justify-content: space-between;
     align-items: center;
 }
+
+.cards {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin: 16px 0 32px 0;
+    width: 100%;
+}
