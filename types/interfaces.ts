@@ -15,4 +15,6 @@ export interface PackageDetails {
   communityInterest: number;
   carefulness: number;
   downloads: { count: number; from: string; to: string }[];
+  health: number;
+  starsCount: number;
 }

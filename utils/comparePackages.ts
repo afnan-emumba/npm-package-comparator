@@ -14,8 +14,11 @@ export const comparePackages = (
     0.5 * package2.downloadsCount +
     0.3 * package2.carefulness;
 
-  const winner = score1 > score2 ? package1.name : package2.name;
-  const ratio = score1 > score2 ? (score1 / score2).toFixed(2) : (score2 / score1).toFixed(2);
+  const winner = score1 > score2 ? package1 : package2;
+  const ratio =
+    score1 > score2
+      ? (score1 / score2).toFixed(2)
+      : (score2 / score1).toFixed(2);
 
   return { winner, ratio };
 };

@@ -38,6 +38,8 @@ export const fetchPackageDetails = async (packageName: string) => {
       communityInterest: data.evaluation.popularity.communityInterest,
       carefulness: data.evaluation.quality.carefulness,
       downloads: data.collected.npm.downloads || [],
+      health: data.evaluation.quality.health,
+      starsCount: data.collected.github.starsCount,
     };
   } catch (error) {
     console.error("Error fetching package details:", error);

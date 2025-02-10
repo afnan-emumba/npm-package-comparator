@@ -10,15 +10,17 @@ import { fetchPackageDetails } from "@/utils/npmApi";
 import { ErrorIcon } from "@/public/icons";
 import { comparePackages } from "@/utils/comparePackages";
 import ComparisonResult from "@/components/comparison-result/ComparisonResult";
+import { PackageDetails } from "@/types/interfaces";
 import styles from "./HomePage.module.css";
 
 const Home = () => {
   const [selectedPackages, setSelectedPackages] = useState<string[]>([]);
   const [comparisonData, setComparisonData] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
-  const [winner, setWinner] = useState<{ name: string; ratio: string } | null>(
-    null
-  );
+  const [winner, setWinner] = useState<{
+    package: PackageDetails;
+    ratio: string;
+  } | null>(null);
 
   const handleCompare = async () => {
     if (selectedPackages.length > 2) {
@@ -42,7 +44,7 @@ const Home = () => {
           packageDetails[0],
           packageDetails[1]
         );
-        setWinner({ name: winner, ratio });
+        setWinner({ package: winner, ratio });
       }
     } catch (error) {
       notification.open({
@@ -58,7 +60,7 @@ const Home = () => {
   const winnerTitle = () => {
     return (
       <>
-        ✨{winner?.name} is{" "}
+        ✨{winner?.package.name} is{" "}
         <span
           style={{
             fontWeight: "bold",
