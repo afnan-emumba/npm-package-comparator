@@ -1,16 +1,14 @@
 import { formatDistanceToNow } from "date-fns";
-import { Tag } from "antd";
+import { Tag, Table } from "antd";
+import type { TableProps } from "antd";
+import { PackageDetails } from "@/types/interfaces";
+import { tableColumns } from "./TableColumns";
+import { getTableData } from "./TableData";
 
-interface PackageDetails {
-  name: string;
-  description: string;
-  lastModified: string;
-  version: string;
-  keywords: string[];
-  repository: string | null;
-  license: string | null;
-  author: string | null;
-  maintainerEmail: string | null;
+interface MyTableProps {
+  key: string;
+  package1: React.ReactNode;
+  package2: React.ReactNode;
 }
 
 interface ComparisonTableProps {
@@ -18,42 +16,17 @@ interface ComparisonTableProps {
 }
 
 const ComparisonTable = ({ packages }: ComparisonTableProps) => {
+  console.log(packages[0]);
+  const columns = tableColumns(packages);
+  const data = getTableData(packages);
+
   return (
     <div>
-      <table>
-        <thead>
-          <tr>
-            <th>Package Name</th>
-            <th>Description</th>
-            <th>Last Modified</th>
-            <th>Version</th>
-            <th>Keywords</th>
-            <th>Repository</th>
-            <th>License</th>
-            <th>Author</th>
-            <th>Maintainer Email</th>
-          </tr>
-        </thead>
-        <tbody>
-          {packages.map((pkg) => (
-            <tr key={pkg.name}>
-              <td>{pkg.name}</td>
-              <td>{pkg.description}</td>
-              <td>{`last modified ${formatDistanceToNow(
-                new Date(pkg.lastModified)
-              )} ago`}</td>
-              <td>{pkg.version}</td>
-              <td>{pkg.keywords.join(", ")}</td>
-              <td>{pkg.repository}</td>
-              <td>
-                <Tag color='gold'>{pkg.license}</Tag>
-              </td>
-              <td>{pkg.author || "N/A"}</td>
-              <td>{pkg.maintainerEmail}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <Table<MyTableProps>
+        columns={columns}
+        dataSource={data}
+        pagination={false}
+      />
     </div>
   );
 };

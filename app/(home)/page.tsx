@@ -5,14 +5,20 @@ import { notification, Card } from "antd";
 import Navbar from "@/components/navbar/Navbar";
 import SearchBar from "@/components/search-bar/SearchBar";
 import ComparisonTable from "@/components/comparison-table/ComparisonTable";
+import DownloadsChart from "@/components/downloads-chart/DownloadsChart";
 import { fetchPackageDetails } from "@/utils/npmApi";
 import { ErrorIcon } from "@/public/icons";
+import { comparePackages } from "@/utils/comparePackages";
+import ComparisonResult from "@/components/comparison-result/ComparisonResult";
 import styles from "./HomePage.module.css";
 
 const Home = () => {
   const [selectedPackages, setSelectedPackages] = useState<string[]>([]);
   const [comparisonData, setComparisonData] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
+  const [winner, setWinner] = useState<{ name: string; ratio: string } | null>(
+    null
+  );
 
   const handleCompare = async () => {
     if (selectedPackages.length > 2) {
@@ -31,6 +37,13 @@ const Home = () => {
         selectedPackages.map((pkg) => fetchPackageDetails(pkg))
       );
       setComparisonData(packageDetails);
+      if (packageDetails.length === 2) {
+        const { winner, ratio } = comparePackages(
+          packageDetails[0],
+          packageDetails[1]
+        );
+        setWinner({ name: winner, ratio });
+      }
     } catch (error) {
       notification.open({
         message: "Error",
@@ -41,6 +54,22 @@ const Home = () => {
     } finally {
       setLoading(false);
     }
+  };
+  const winnerTitle = () => {
+    return (
+      <>
+        ✨{winner?.name} is{" "}
+        <span
+          style={{
+            fontWeight: "bold",
+            fontSize: "24px",
+          }}
+        >
+          {winner?.ratio}x
+        </span>{" "}
+        better!✨
+      </>
+    );
   };
 
   return (
@@ -59,14 +88,15 @@ const Home = () => {
               <ComparisonTable packages={comparisonData} />
             </Card>
             <Card title='Downloads' style={{ width: 850 }}>
-              <h1>Downloads</h1>
+              <DownloadsChart packages={comparisonData} />
             </Card>
-            <Card title='Winner' style={{ width: 850 }}>
-              <h1>Winner</h1>
+            <Card title={winnerTitle()} style={{ width: 850 }}>
+              <ComparisonResult winner={winner} />
             </Card>
           </div>
         )}
       </div>
+      <p className={styles.footer}>Copyright ©2025 Emumba Inc.</p>
     </div>
   );
 };

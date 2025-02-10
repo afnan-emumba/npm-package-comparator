@@ -23,7 +23,6 @@ export default function RootLayout({
       <head>
         <link rel='icon' href='/favicon.svg' />
       </head>
-
       <body id='root'>
         <AntdProvider>{children}</AntdProvider>
       </body>
