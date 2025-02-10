@@ -5,6 +5,7 @@ export const fetchPackages = async (query: string) => {
     const response = await axios.get(
       `https://api.npms.io/v2/search/suggestions?q=${query}`
     );
+    // eslint-disable-next-line
     return response.data.map((pkg: any) => ({
       value: pkg.package.name,
       label: pkg.package.name,

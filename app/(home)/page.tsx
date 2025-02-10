@@ -15,6 +15,7 @@ import styles from "./HomePage.module.css";
 
 const Home = () => {
   const [selectedPackages, setSelectedPackages] = useState<string[]>([]);
+  // eslint-disable-next-line
   const [comparisonData, setComparisonData] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [winner, setWinner] = useState<{
